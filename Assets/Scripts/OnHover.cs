@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using TMPro;
 using UnityEngine;
 
 public class OnHover : MonoBehaviour
@@ -9,11 +10,7 @@ public class OnHover : MonoBehaviour
     MeshRenderer m_Renderer;
     Color m_Color;
 
-    private GameObject TextGameObject;
-    private TextMesh m_TextMesh;
-
-    public Vector3 DisplayLocation = new Vector3(0, 0, 0);
-    public Vector3 DisplayRotation = new Vector3(0, 0, 0);
+    public TMP_Text WorldText;
 
     private const string label = "The count is:";
     private int i = 0;
@@ -23,23 +20,17 @@ public class OnHover : MonoBehaviour
         m_Renderer = GetComponent<MeshRenderer>();
         m_Color = m_Renderer.material.color;
 
-        TextGameObject = new GameObject();
-        TextGameObject.name = "TextGameObject";
-        m_TextMesh = TextGameObject.AddComponent(typeof(TextMesh)) as TextMesh;
-        m_TextMesh.text = "init";
     }
     void OnMouseOver()
     {
         m_Color.a = hover_opacity;
-
-        m_TextMesh.text = label + i;
+        WorldText.text = label + i;
         i++;
     }
 
     void OnMouseExit()
     {
+        WorldText.text = "";
         m_Color.a = 1f;
-
-        m_TextMesh.text = "";
     }
 }
