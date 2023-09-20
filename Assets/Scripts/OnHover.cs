@@ -30,8 +30,6 @@ public class OnHover : MonoBehaviour
     }
     void OnMouseOver()
     {
-        Debug.Log("over");
-
         m_Color.a = hover_opacity;
 
         m_TextMesh.text = label + i;
@@ -40,7 +38,6 @@ public class OnHover : MonoBehaviour
 
     void OnMouseExit()
     {
-        Debug.Log("exit");
         m_Color.a = 1f;
 
         m_TextMesh.text = "";
