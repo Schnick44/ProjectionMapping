@@ -1,4 +1,5 @@
 
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ParallelState : AbstractState
@@ -6,7 +7,7 @@ public class ParallelState : AbstractState
 
     
 
-    public override void EnterState(StateManager context) {
+    public override async void EnterState(StateManager context) {
 
         // toggle switch material to closed
         Material material = context.switchGO.gameObject.GetComponent<Renderer>().material;
@@ -14,7 +15,27 @@ public class ParallelState : AbstractState
         Debug.Log(material);
 
         // particles: get moving again
+        foreach (GameObject cable in context.GetCables()) {
+            ParticleSystem particles = cable.GetComponentInChildren<ParticleSystem>();
+            if (cable.name == "Cable2p" || cable.name == "Cable3p" || cable.name == "Cable4p") {
 
+            }
+
+            // cable 5, 6
+            if (cable.name == "Cable5p" || cable.name == "Cable6p") {
+                var emission = particles.emission;
+                emission.enabled = true;
+                await Task.Delay(1500);
+            }
+
+            if(cable.name == "Cable7p") {
+                var shape = particles.shape;
+                shape.position += Vector3.forward * -0.2f;
+                var main = particles.main;
+                main.startLifetime = 2.44f;
+            }
+
+        }
 
         // lamp: set emission to rgb(191, 109, 0), intensity 0.45f
         Material lampMat = context.lamp.gameObject.GetComponent<Renderer>().material;

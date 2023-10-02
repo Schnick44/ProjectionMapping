@@ -31,6 +31,8 @@ public class StateManager : MonoBehaviour
     // lamppara
     public GameObject lamp;
 
+    private List<GameObject> cables;
+
     // also do textures bc i'm dumb and cant find how to toggle textures
     public Texture m_Open, m_Closed;
 
@@ -39,9 +41,10 @@ public class StateManager : MonoBehaviour
     {
         // initialize parallel as default
         currentState = parallelState;
+        cables = new List<GameObject> { cable2, cable3, cable4, cable5, cable6, cable7 };
 
         // do things supposed to happen when parallel state is just switched to
-        currentState.EnterState(this);
+        //currentState.EnterState(this);
     }
 
     // Update is called once per frame
@@ -63,5 +66,9 @@ public class StateManager : MonoBehaviour
     void switchState(AbstractState futureState) {
         currentState = futureState;
         currentState.EnterState(this);
+    }
+
+    public List<GameObject> GetCables() {
+        return cables;
     }
 }
