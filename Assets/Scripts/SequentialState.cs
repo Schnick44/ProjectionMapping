@@ -14,7 +14,8 @@ public class SequentialState : AbstractState
 
 
         // reduce glow (emission to black? parallel separate material?)
-
+        Material lampMat = context.lamp.gameObject.GetComponent<Renderer>().material;
+        lampMat.SetColor("_EmissionColor", new Color(0f, 0f, 0f));
         
     }
 
