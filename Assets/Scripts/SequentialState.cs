@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SequentialState : AbstractState
 {
-    public override void enterState(StateManager context) {
+    public override void EnterState(StateManager context) {
 
         // Switch: set material closed
 
@@ -16,7 +16,7 @@ public class SequentialState : AbstractState
         
     }
 
-    public override void updateState(StateManager context) {
+    public override void UpdateState(StateManager context) {
         
     }
 

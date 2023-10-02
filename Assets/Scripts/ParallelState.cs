@@ -4,7 +4,7 @@ using UnityEngine;
 public class ParallelState : AbstractState
 {
 
-    public override void enterState(StateManager context) {
+    public override void EnterState(StateManager context) {
 
         // toggle switch material to closed
 
@@ -16,7 +16,7 @@ public class ParallelState : AbstractState
 
     }
 
-    public override void updateState(StateManager context) {
+    public override void UpdateState(StateManager context) {
 
     }
 

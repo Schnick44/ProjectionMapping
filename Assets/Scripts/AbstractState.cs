@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class AbstractState
 {
-    public abstract void enterState(StateManager context);
+    // it feels wrong but uppercase function names are convention
+    public abstract void EnterState(StateManager context);
 
-    public abstract void updateState(StateManager context);
+    public abstract void UpdateState(StateManager context);
 }
