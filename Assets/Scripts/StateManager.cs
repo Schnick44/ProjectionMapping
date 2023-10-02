@@ -20,43 +20,44 @@ public class StateManager : MonoBehaviour
 
     // every object we might need:
     // switch
-    private GameObject switchGO;
+    public GameObject switchGO;
     // cable 2-7
-    private GameObject cable2;
-    private GameObject cable3;
-    private GameObject cable4;
-    private GameObject cable5;
-    private GameObject cable6;
-    private GameObject cable7;
+    public GameObject cable2;
+    public GameObject cable3;
+    public GameObject cable4;
+    public GameObject cable5;
+    public GameObject cable6;
+    public GameObject cable7;
     // lamppara
-    private GameObject lamp;
+    public GameObject lamp;
+
+    // also do textures bc i'm dumb and cant find how to toggle textures
+    public Texture m_Open, m_Closed;
 
     // Start is called before the first frame update
     void Start()
     {
         // initialize parallel as default
         currentState = parallelState;
+
+        // do things supposed to happen when parallel state is just switched to
         currentState.EnterState(this);
-
-        // switch
-        switchGO = GameObject.Find("Switch");
-        // cable 2-7
-        cable2 = GameObject.Find("Cable2p");
-        cable3 = GameObject.Find("Cable3p");
-        cable4 = GameObject.Find("Cable4p");
-        cable5 = GameObject.Find("Cable5p");
-        cable6 = GameObject.Find("Cable6p");
-        cable7 = GameObject.Find("Cable7p");
-        lamp = GameObject.Find("LampParallel");
-
-        // test that init works - it does 
-        print(lamp.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text);
     }
 
     // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
+        if (Input.anyKeyDown) {
+            Debug.Log("input registered");
+            if (currentState is ParallelState) {
+                currentState = sequentialState;
+                currentState.EnterState(this);
+            } else {
+                currentState = parallelState;
+                currentState.EnterState(this);
+            }
+        }
     }
 
     void switchState(AbstractState futureState) {

@@ -11177,7 +11177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1cda135fd4dc3d04ba2a546bb4f46e88, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1cda135fd4dc3d04ba2a546bb4f46e88, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11186,7 +11186,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1cda135fd4dc3d04ba2a546bb4f46e88, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 98791ea387922674284b86f67a5ee9cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 6fe7547df6f9f6f48983d54a64051fbe, type: 2}
     - target: {fileID: 919132149155446097, guid: 1cda135fd4dc3d04ba2a546bb4f46e88, type: 3}
       propertyPath: m_Name
       value: Switch
@@ -11237,6 +11237,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b149693c3488cc740b17af3e0088d1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchGO: {fileID: 2024892792}
+  cable2: {fileID: 360210886}
+  cable3: {fileID: 567768302}
+  cable4: {fileID: 236786876}
+  cable5: {fileID: 952792048}
+  cable6: {fileID: 1871969125}
+  cable7: {fileID: 379331305}
+  lamp: {fileID: 1434049392}
+  m_Open: {fileID: 2800000, guid: 34e5aa70404e08f4caa6b1a59a37ec3b, type: 3}
+  m_Closed: {fileID: 2800000, guid: 324211b21d63d7b40a1ae14f4c3fd7ba, type: 3}
 --- !u!1 &633592144
 GameObject:
   m_ObjectHideFlags: 0
