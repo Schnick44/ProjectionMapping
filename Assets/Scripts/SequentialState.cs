@@ -10,6 +10,10 @@ public class SequentialState : AbstractState
         // Switch: set material closed
         m_Renderer = context.switchGO.gameObject.GetComponent<Renderer>();
         m_Renderer.material.SetTexture("_BaseMap", context.m_Open);
+        // set switch particles to only reach half of switch
+        ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
+        var switchParticlesMain = switchParticles.main;
+        switchParticlesMain.startLifetime = 0.5f;
 
         // particles: pause particlesystems (pause())
         foreach (GameObject cable in context.GetCables()) {
@@ -21,7 +25,7 @@ public class SequentialState : AbstractState
 
                 // make particles persistent (forever)
                 var main = particles.main;
-                main.startLifetime = 10.0f;
+                main.startLifetime = 5.0f;
 
                 // lower emission so that particles wont be flooded too early
                 if (cable.name != "Cable2p") {

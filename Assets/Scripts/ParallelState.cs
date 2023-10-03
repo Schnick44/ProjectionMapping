@@ -14,6 +14,10 @@ public class ParallelState : AbstractState
         Material material = context.switchGO.gameObject.GetComponent<Renderer>().material;
         material.SetTexture("_BaseMap", context.m_Closed);
         Debug.Log(material);
+        // reset particle lifetime
+        ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
+        var switchParticlesMain = switchParticles.main;
+        switchParticlesMain.startLifetime = 1.0f;
 
         // particles: get moving again
         foreach (GameObject cable in context.GetCables()) {
