@@ -19,6 +19,15 @@ public class SequentialState : AbstractState
             // cables 2-4 create jam effect
             if (cable.name == "Cable2p" || cable.name == "Cable3p" || cable.name == "Cable4p") {
 
+                // make particles persistent (forever)
+                var main = particles.main;
+                main.startLifetime = 10.0f;
+
+                // lower emission so that particles wont be flooded too early
+                if (cable.name != "Cable2p") {
+                    var emission = particles.emission;
+                    emission.rateOverTime = 1.0f;
+                }
             }
 
             // cables 5,6 emission to zero

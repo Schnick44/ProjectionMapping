@@ -1,4 +1,5 @@
 
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -19,6 +20,17 @@ public class ParallelState : AbstractState
             ParticleSystem particles = cable.GetComponentInChildren<ParticleSystem>();
             if (cable.name == "Cable2p" || cable.name == "Cable3p" || cable.name == "Cable4p") {
 
+                // take care of how long particles persist
+                var main = particles.main;
+                // cable 3 is half as short as others
+                if (cable.name == "Cable3p") {
+                    main.startLifetime = 0.6f;
+                } else {
+                    main.startLifetime = 1.2f;
+                }
+
+                var emission = particles.emission;
+                emission.rateOverTime = 3.0f;
             }
 
             // cable 5, 6
