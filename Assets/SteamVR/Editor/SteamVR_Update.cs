@@ -39,7 +39,7 @@ namespace Valve.VR
             if (!gotVersion)
             {
                 if (wwwVersion == null)
-                    wwwVersion = new WWW(versionUrl);
+                    return;
 
                 if (!wwwVersion.isDone)
                     return;

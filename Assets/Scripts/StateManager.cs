@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Valve.VR;
 
 public class StateManager : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class StateManager : MonoBehaviour
     // also do textures bc i'm dumb and cant find how to toggle textures
     public Texture m_Open, m_Closed;
 
+    public SteamVR_Behaviour_Pose pose;
+    public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.GetBooleanAction("InteractUI");
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,13 +49,16 @@ public class StateManager : MonoBehaviour
 
         // do things supposed to happen when parallel state is just switched to
         //currentState.EnterState(this);
+
+        if (pose == null)
+            pose = this.GetComponent<SteamVR_Behaviour_Pose>();
     }
 
     // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
-        if (Input.anyKeyDown) {
+        if (interactWithUI.GetStateUp(pose.inputSource)) {
             Debug.Log("input registered");
             if (currentState is ParallelState) {
                 currentState = sequentialState;

@@ -6,6 +6,7 @@ using Valve.VR.Extras;
 public class LaserPointer : MonoBehaviour
 { 
     private SteamVR_LaserPointer laserPointer; // issue
+    private GameObject dot;
 
     private void OnEnable() {
         laserPointer = GetComponent<SteamVR_LaserPointer>();
@@ -13,17 +14,33 @@ public class LaserPointer : MonoBehaviour
         laserPointer.PointerIn += HandlePointerIn;
         laserPointer.PointerOut -= HandlePointerOut;
         laserPointer.PointerOut += HandlePointerOut;
+        laserPointer.PointerColliding += HandleCollision;
+        dot = GameObject.Find("dot").gameObject;
     }
 
     private void HandlePointerIn(object sender, PointerEventArgs e) //issue
     {
-        Debug.Log("[SENDER:] " + sender);
-        Debug.Log("[PointerEvent:] " + e);
+
+        // IPointerEnterHandler pointerEnterHandler = e.target.GetComponent<IPointerEnterHandler>();
+        if (e.target.GetComponent<OnHover>())
+        {
+            e.target.GetComponent<OnHover>().OnPointerEnter();
+        }
+
+        dot.transform.position = e.target.position;
+
+    }
+
+    private void HandleCollision(object sender, PointerEventArgs e)
+    {
+        dot.transform.position = e.target.position;
     }
 
     private void HandlePointerOut(object sender, PointerEventArgs e) // issue
     {
-        Debug.Log("[SENDER:] " + sender);
-        Debug.Log("[PointerEvent:] " + e);
+        if (e.target.GetComponent<OnHover>())
+        {
+            e.target.GetComponent<OnHover>().OnPointerExit();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using TMPro;
 using UnityEngine;
+using Valve.VR.Extras;
 
 public class OnHover : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class OnHover : MonoBehaviour
     private const string label = "The count is:";
     private int i = 0;
 
+
     void Start()
     {
         m_Renderer = GetComponent<MeshRenderer>();
@@ -27,9 +29,11 @@ public class OnHover : MonoBehaviour
         // very hacky to be able to manipulate alpha values
         m_Material = GetComponent<Renderer>().material;
         m_MaterialColor = m_Material.color;
+
     }
-    void OnMouseOver()
+    public void OnPointerEnter()
     {
+        Debug.Log("pointer enter detected");
         m_Color.a = hover_opacity;
         WorldText.text = label + i;
         i++;
@@ -41,7 +45,7 @@ public class OnHover : MonoBehaviour
         }
     }
 
-    void OnMouseExit()
+    public void OnPointerExit()
     {
         WorldText.text = "";
         m_Color.a = 1f;

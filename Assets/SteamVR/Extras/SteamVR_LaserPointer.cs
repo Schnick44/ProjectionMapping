@@ -24,6 +24,8 @@ namespace Valve.VR.Extras
         public event PointerEventHandler PointerOut;
         public event PointerEventHandler PointerClick;
 
+        public event PointerEventHandler PointerColliding;
+
         Transform previousContact = null;
 
 
@@ -88,6 +90,11 @@ namespace Valve.VR.Extras
                 PointerOut(this, e);
         }
 
+        public virtual void OnPointerColliding(PointerEventArgs e) {
+            if (PointerColliding != null)
+                PointerColliding(this, e);
+        }
+
 
         private void Update()
         {
@@ -130,6 +137,10 @@ namespace Valve.VR.Extras
             if (bHit && hit.distance < 100f)
             {
                 dist = hit.distance;
+                PointerEventArgs argsColl = new PointerEventArgs();
+                argsColl.target = hit.transform;
+                argsColl.distance = dist;
+                OnPointerColliding(argsColl);
             }
 
             if (bHit && interactWithUI.GetStateUp(pose.inputSource))
@@ -152,6 +163,7 @@ namespace Valve.VR.Extras
                 pointer.transform.localScale = new Vector3(thickness, thickness, dist);
                 pointer.GetComponent<MeshRenderer>().material.color = color;
             }
+
             pointer.transform.localPosition = new Vector3(0f, 0f, dist / 2f);
         }
     }
