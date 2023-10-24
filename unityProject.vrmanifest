@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.circuitprojectionmapping.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "E:\\Nora Projekt\\ProjectionMapping\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\IXLAB\\Desktop\\ProjectionSpace\\group9\\repo\\ProjectionMapping\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "CircuitProjectionMapping [Testing]"
