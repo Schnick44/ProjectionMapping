@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class SequentialState : AbstractState
 {
-    Renderer m_Renderer;
+    
     public override async void EnterState(StateManager context) {
 
+        Debug.Log(context);
+
         // Switch: set material closed
-        m_Renderer = context.switchGO.gameObject.GetComponent<Renderer>();
-        m_Renderer.material.SetTexture("_BaseMap", context.m_Open);
+        Renderer rend = context.switchGO.gameObject.GetComponent<Renderer>();
+        rend.material.EnableKeyword("_BaseMap");
+        rend.material.SetTexture("_BaseMap", context.m_Open);
         // set switch particles to only reach half of switch
         ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
         var switchParticlesMain = switchParticles.main;
@@ -46,7 +49,7 @@ public class SequentialState : AbstractState
                 var shape = particles.shape;
                 shape.position += Vector3.forward * 0.2f;
                 var main = particles.main;
-                main.startLifetime = 1.7f;
+                main.startLifetime = 2.0f;
             }
 
         }

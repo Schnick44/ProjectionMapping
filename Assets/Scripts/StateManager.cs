@@ -59,7 +59,6 @@ public class StateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
         if (interactWithUI.GetStateUp(pose.inputSource)) {
-            Debug.Log("input registered");
             if (currentState is ParallelState) {
                 currentState = sequentialState;
                 currentState.EnterState(this);

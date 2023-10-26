@@ -6,14 +6,11 @@ using UnityEngine;
 public class ParallelState : AbstractState
 {
 
-    
-
     public override async void EnterState(StateManager context) {
 
         // toggle switch material to closed
         Material material = context.switchGO.gameObject.GetComponent<Renderer>().material;
-        material.SetTexture("_BaseMap", context.m_Closed);
-        Debug.Log(material);
+        material.SetTexture("_BaseMap", context.m_Open);
         // reset particle lifetime
         ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
         var switchParticlesMain = switchParticles.main;
@@ -26,11 +23,11 @@ public class ParallelState : AbstractState
 
                 // take care of how long particles persist
                 var main = particles.main;
-                // cable 3 is half as short as others
-                if (cable.name == "Cable3p") {
-                    main.startLifetime = 0.6f;
+                // cable 2 is roughly double as others
+                if (cable.name == "Cable2p") {
+                    main.startLifetime = 0.9f;
                 } else {
-                    main.startLifetime = 1.2f;
+                    main.startLifetime = 0.4f;
                 }
 
                 var emission = particles.emission;
@@ -48,7 +45,7 @@ public class ParallelState : AbstractState
                 var shape = particles.shape;
                 shape.position += Vector3.forward * -0.2f;
                 var main = particles.main;
-                main.startLifetime = 2.44f;
+                main.startLifetime = 2.7f;
             }
 
         }

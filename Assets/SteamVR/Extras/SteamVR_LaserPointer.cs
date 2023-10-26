@@ -17,6 +17,7 @@ namespace Valve.VR.Extras
         public Color clickColor = Color.green;
         public GameObject holder;
         public GameObject pointer;
+        public GameObject dot;
         bool isActive = false;
         public bool addRigidBody = false;
         public Transform reference;
@@ -110,7 +111,7 @@ namespace Valve.VR.Extras
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
 
-            if (previousContact && previousContact != hit.transform)
+            if (previousContact && previousContact != hit.transform) // pointer just left
             {
                 PointerEventArgs args = new PointerEventArgs();
                 args.fromInputSource = pose.inputSource;
@@ -120,7 +121,7 @@ namespace Valve.VR.Extras
                 OnPointerOut(args);
                 previousContact = null;
             }
-            if (bHit && previousContact != hit.transform)
+            if (bHit && previousContact != hit.transform) // pointer just entered
             {
                 PointerEventArgs argsIn = new PointerEventArgs();
                 argsIn.fromInputSource = pose.inputSource;
@@ -130,20 +131,21 @@ namespace Valve.VR.Extras
                 OnPointerIn(argsIn);
                 previousContact = hit.transform;
             }
-            if (!bHit)
+            if (!bHit) // not hitting anythin
             {
                 previousContact = null;
             }
-            if (bHit && hit.distance < 100f)
+            if (bHit && hit.distance < 100f) // hitting
             {
                 dist = hit.distance;
                 PointerEventArgs argsColl = new PointerEventArgs();
                 argsColl.target = hit.transform;
                 argsColl.distance = dist;
+                // dot.transform.position += hit.point;
                 OnPointerColliding(argsColl);
             }
 
-            if (bHit && interactWithUI.GetStateUp(pose.inputSource))
+            if (bHit && interactWithUI.GetStateUp(pose.inputSource)) // hitting & clicking
             {
                 PointerEventArgs argsClick = new PointerEventArgs();
                 argsClick.fromInputSource = pose.inputSource;
@@ -153,18 +155,19 @@ namespace Valve.VR.Extras
                 OnPointerClick(argsClick);
             }
 
-            if (interactWithUI != null && interactWithUI.GetState(pose.inputSource))
+            if (interactWithUI != null && interactWithUI.GetState(pose.inputSource)) //  handle clickevent for pointer
             {
                 pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
                 pointer.GetComponent<MeshRenderer>().material.color = clickColor;
             }
-            else
+            else  // remove clickstate
             {
                 pointer.transform.localScale = new Vector3(thickness, thickness, dist);
                 pointer.GetComponent<MeshRenderer>().material.color = color;
             }
 
             pointer.transform.localPosition = new Vector3(0f, 0f, dist / 2f);
+            dot.transform.localPosition += hit.point;
         }
     }
 
