@@ -10,7 +10,7 @@ public class ParallelState : AbstractState
 
         // toggle switch material to closed
         Material material = context.switchGO.gameObject.GetComponent<Renderer>().material;
-        material.SetTexture("_BaseMap", context.m_Open);
+        material.SetTexture("_MainTex", context.m_Closed);
         // reset particle lifetime
         ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
         var switchParticlesMain = switchParticles.main;

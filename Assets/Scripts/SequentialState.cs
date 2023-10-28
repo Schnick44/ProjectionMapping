@@ -7,12 +7,9 @@ public class SequentialState : AbstractState
     
     public override async void EnterState(StateManager context) {
 
-        Debug.Log(context);
-
         // Switch: set material closed
         Renderer rend = context.switchGO.gameObject.GetComponent<Renderer>();
-        rend.material.EnableKeyword("_BaseMap");
-        rend.material.SetTexture("_BaseMap", context.m_Open);
+        rend.material.SetTexture("_MainTex", context.m_Open);
         // set switch particles to only reach half of switch
         ParticleSystem switchParticles = context.switchGO.GetComponentInChildren<ParticleSystem>();
         var switchParticlesMain = switchParticles.main;
